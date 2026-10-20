@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encuesta General - Laboratorio de Tecnología</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;family=Fraunces:opsz,wght@9..144,700;9..144,800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#143c36; --teal:#00574a; --teal-bright:#028371; --cream:#fdf8ef; }
+    * { box-sizing:border-box; }
+    body { font-family:"DM Sans",sans-serif; }
+    .display-font { font-family:"Fraunces",serif; }
+    .paper-noise {
+      background-image:radial-gradient(circle at 14% 15%,rgba(253,248,239,.14) 0 1px,transparent 1.5px),
+                        radial-gradient(circle at 78% 50%,rgba(253,248,239,.10) 0 1px,transparent 1.5px);
+      background-size:24px 24px,33px 33px;
+    }
+    .survey-card { box-shadow:0 24px 70px rgba(0,32,27,.24); animation:rise-in .55s cubic-bezier(.2,.75,.25,1) both; }
+    @keyframes rise-in { from { opacity:0;transform:translateY(18px) } to { opacity:1;transform:translateY(0) } }
+    .step[hidden], [hidden] { display:none !important; }
+    .field-input { border:1px solid #b9c8be;color:var(--ink);background:#fffdf8;transition:border-color .18s,box-shadow .18s; }
+    .field-input:focus { outline:none;border-color:var(--teal-bright);box-shadow:0 0 0 4px rgba(2,131,113,.12); }
+    .choice-option input { position:absolute;opacity:0;width:1px;height:1px; }
+    .choice-option input:checked + span { border-color:var(--teal-bright);background:rgba(2,131,113,.09); }
+    .choice-option input:checked + span .radio-mark { border-color:var(--teal-bright);box-shadow:inset 0 0 0 4px var(--teal-bright); }
+    .choice-option input:focus-visible + span, button:focus-visible {
+      outline:3px solid rgba(2,131,113,.5);outline-offset:3px;
+    }
+    .step { animation:rise-in .3s ease both; }
+    .intro-copy { white-space:pre-line; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+</head>
+<body class="paper-noise min-h-screen w-full" style="background: rgb(0, 87, 74);">
+ <main class="w-full px-4 py-10 sm:px-6 sm:py-16">
+  <section class="mx-auto w-full max-w-3xl">
+   <div class="mb-7 flex items-center gap-3 text-[#fdf8ef]">
+    <span class="flex h-10 w-10 items-center justify-center rounded-full border border-[#fdf8ef]/30 bg-[#fdf8ef]/10" aria-hidden="true"><i data-lucide="clipboard-list" class="h-5 w-5"></i></span> 
+    <span class="font-semibold uppercase tracking-[.14em]" style="color: rgb(253, 248, 239); font-weight: 700; font-size: 14px; letter-spacing: 0.1rem;">Tu opinión cuenta</span>
+   </div>
+   <div class="survey-card rounded-[2rem] p-6 sm:p-10 lg:p-12" style="background: rgb(253, 248, 239);">
+    <header class="border-b border-[#d9e0d8] pb-7">
+     <h1 class="display-font leading-tight" style="color: rgb(20, 60, 54); font-weight: 800; font-size: 32px;">Indagación Laboratorio de tecnología</h1>
+    </header>
+    <form id="survey-form" class="mt-7" novalidate="">
+     <div class="mb-8">
+      <div class="flex items-center justify-between gap-3">
+       <span class="font-semibold" style="color: rgb(0, 87, 74); font-weight: 700; font-size: 14px;">Progreso de la encuesta</span> 
+       <span id="progress-count" class="text-sm font-bold text-[#00574a]" aria-live="polite">1 / 6</span>
+      </div>
+      <div class="mt-3 h-2 overflow-hidden rounded-full bg-[#d9e0d8]" role="progressbar" id="progress-track" aria-label="Progreso de la encuesta" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
+       <div id="progress-fill" class="h-full rounded-full bg-[#028371] transition-all duration-300" style="width:16.6667%"></div>
+      </div>
+     </div>
+
+     <!-- Sección 1 -->
+     <section class="step" data-step="0" aria-label="Sección 1 de 6">
+      <p class="intro-copy leading-relaxed" style="color: rgb(66, 97, 89); font-weight: 400; font-size: 18px; line-height: 1.5;">Desde el Instituto de Investigaciones en Educación en las Ciencias Experimentales (IIECE), de la Facultad de Filosofía, Humanidades y Artes de la Universidad Nacional de San Juan (UNSJ), estamos llevando adelante una investigación orientada a conocer y analizar el lugar que ocupa el Laboratorio de Tecnología en los procesos de formación.
+
+En este marco, te invitamos a participar respondiendo el presente formulario. Tu experiencia, perspectiva y opiniones constituyen un aporte valioso para comprender esta temática y contribuir al fortalecimiento de las propuestas de formación en el área de Tecnología.
+
+La información proporcionada será tratada de manera confidencial y utilizada en el marco de esta investigación.
+
+Agradecemos tu tiempo y disposición para participar. Tu colaboración es fundamental para el desarrollo de este estudio.</p>
+      <fieldset class="mt-7">
+       <legend class="font-bold" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 18px;">¿Desea participar de la siguiente encuesta?</legend>
+       <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        <label class="choice-option relative cursor-pointer"> 
+          <input type="radio" name="participacion" value="Sí"> 
+          <span class="flex items-center gap-3 rounded-xl border border-[#c7d2ca] px-4 py-4"> 
+            <span class="radio-mark h-4 w-4 shrink-0 rounded-full border-2 border-[#9caf9f]" aria-hidden="true"></span> 
+            <span class="font-medium" style="color: rgb(20, 60, 54); font-weight: 500; font-size: 16px;">Sí</span> 
+          </span> 
+        </label> 
+        <label class="choice-option relative cursor-pointer"> 
+          <input type="radio" name="participacion" value="No"> 
+          <span class="flex items-center gap-3 rounded-xl border border-[#c7d2ca] px-4 py-4"> 
+            <span class="radio-mark h-4 w-4 shrink-0 rounded-full border-2 border-[#9caf9f]" aria-hidden="true"></span> 
+            <span class="font-medium" style="color: rgb(20, 60, 54); font-weight: 500; font-size: 16px;">No</span> 
+          </span> 
+        </label>
+       </div>
+      </fieldset>
+     </section>
+
+     <!-- Sección 2 -->
+     <section class="step" data-step="1" aria-label="Sección 2 de 6" hidden="">
+      <div>
+        <label class="block font-bold" for="carrera" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 18px;">Indique su carrera</label> 
+        <input id="carrera" name="carrera" type="text" maxlength="300" class="field-input mt-4 w-full rounded-xl px-4 py-3" autocomplete="off">
+      </div>
+      <div class="mt-6">
+        <label class="block font-bold" for="institucion" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 18px;">Indique la institución donde cursa</label> 
+        <input id="institucion" name="institucion" type="text" maxlength="300" class="field-input mt-4 w-full rounded-xl px-4 py-3" autocomplete="off">
+      </div>
+      <fieldset class="mt-6">
+       <legend class="font-bold" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 18px;">En caso de que estés cursando materias, ¿a qué año corresponde el mayor porcentaje?</legend>
+       <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        <label class="choice-option relative cursor-pointer"><input type="radio" name="anio_cursado" value="1° año"><span class="flex items-center gap-3 rounded-xl border border-[#c7d2ca] px-4 py-3"><span class="radio-mark h-4 w-4 shrink-0 rounded-full border-2 border-[#9caf9f]" aria-hidden="true"></span><span class="font-medium" style="color: rgb(20, 60, 54); font-weight: 500; font-size: 16px;">1° año</span></span></label>
+        <label class="choice-option relative cursor-pointer"><input type="radio" name="anio_cursado" value="2° año"><span class="flex items-center gap-3 rounded-xl border border-[#c7d2ca] px-4 py-3"><span class="radio-mark h-4 w-4 shrink-0 rounded-full border-2 border-[#9caf9f]" aria-hidden="true"></span><span class="font-medium" style="color: rgb(20, 60, 54); font-weight: 500; font-size: 16px;">2° año</span></span></label>
+        <label class="choice-option relative cursor-pointer"><input type="radio" name="anio_cursado" value="3° año"><span class="flex items-center gap-3 rounded-xl border border-[#c7d2ca] px-4 py-3"><span class="radio-mark h-4 w-4 shrink-0 rounded-full border-2 border-[#9caf9f]" aria-hidden="true"></span><span class="font-medium" style="color: rgb(20, 60, 54); font-weight: 500; font-size: 16px;">3° año</span></span></label>
+        <label class="choice-option relative cursor-pointer"><input type="radio" name="anio_cursado" value="4° año o más"><span class="flex items-center gap-3 rounded-xl border border-[#c7d2ca] px-4 py-3"><span class="radio-mark h-4 w-4 shrink-0 rounded-full border-2 border-[#9caf9f]" aria-hidden="true"></span><span class="font-medium" style="color: rgb(20, 60, 54); font-weight: 500; font-size: 16px;">4° año o más</span></span></label>
+       </div>
+      </fieldset>
+     </section>
+
+     <!-- Sección 3 -->
+     <section class="step" data-step="2" aria-label="Sección 3 de 6" hidden="">
+      <fieldset>
+       <legend class="font-bold" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 18px;">¿Cómo describirías el servicio o la experiencia?</legend>
+       <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        <label class="choice-option relative cursor-pointer"><input type="radio" name="servicio" value="Superó mis expectativas"><span class="flex items-center gap-3 rounded-xl border border-[#c7d2ca] px-4 py-3"><span class="radio-mark h-4 w-4 shrink-0 rounded-full border-2 border-[#9caf9f]" aria-hidden="true"></span><span class="font-medium" style="color: rgb(20, 60, 54); font-weight: 500; font-size: 16px;">Superó mis expectativas</span></span></label> 
+        <label class="choice-option relative cursor-pointer"><input type="radio" name="servicio" value="Cumplió mis expectativas"><span class="flex items-center gap-3 rounded-xl border border-[#c7d2ca] px-4 py-3"><span class="radio-mark h-4 w-4 shrink-0 rounded-full border-2 border-[#9caf9f]" aria-hidden="true"></span><span class="font-medium" style="color: rgb(20, 60, 54); font-weight: 500; font-size: 16px;">Cumplió mis expectativas</span></span></label> 
+        <label class="choice-option relative cursor-pointer"><input type="radio" name="servicio" value="Podría mejorar"><span class="flex items-center gap-3 rounded-xl border border-[#c7d2ca] px-4 py-3"><span class="radio-mark h-4 w-4 shrink-0 rounded-full border-2 border-[#9caf9f]" aria-hidden="true"></span><span class="font-medium" style="color: rgb(20, 60, 54); font-weight: 500; font-size: 16px;">Podría mejorar</span></span></label> 
+        <label class="choice-option relative cursor-pointer"><input type="radio" name="servicio" value="No estoy seguro"><span class="flex items-center gap-3 rounded-xl border border-[#c7d2ca] px-4 py-3"><span class="radio-mark h-4 w-4 shrink-0 rounded-full border-2 border-[#9caf9f]" aria-hidden="true"></span><span class="font-medium" style="color: rgb(20, 60, 54); font-weight: 500; font-size: 16px;">No estoy seguro</span></span></label>
+       </div>
+      </fieldset>
+     </section>
+
+     <!-- Sección 4 -->
+     <section class="step" data-step="3" aria-label="Sección 4 de 6" hidden="">
+      <h2 class="font-bold" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 18px;">¿Qué aspectos positivos destacarías?</h2>
+      <p class="mt-2" style="color: rgb(88, 113, 104); font-weight: 400; font-size: 14px;">Escribe hasta cinco palabras o frases, en el orden que prefieras.</p>
+      <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-5">
+       <div><label class="mb-2 block text-center font-bold" for="positivo-1" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 16px;">1</label><input id="positivo-1" name="positivo_1" type="text" maxlength="300" class="field-input w-full rounded-xl px-3 py-3 text-center" autocomplete="off"></div>
+       <div><label class="mb-2 block text-center font-bold" for="positivo-2" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 16px;">2</label><input id="positivo-2" name="positivo_2" type="text" maxlength="300" class="field-input w-full rounded-xl px-3 py-3 text-center" autocomplete="off"></div>
+       <div><label class="mb-2 block text-center font-bold" for="positivo-3" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 16px;">3</label><input id="positivo-3" name="positivo_3" type="text" maxlength="300" class="field-input w-full rounded-xl px-3 py-3 text-center" autocomplete="off"></div>
+       <div><label class="mb-2 block text-center font-bold" for="positivo-4" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 16px;">4</label><input id="positivo-4" name="positivo_4" type="text" maxlength="300" class="field-input w-full rounded-xl px-3 py-3 text-center" autocomplete="off"></div>
+       <div><label class="mb-2 block text-center font-bold" for="positivo-5" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 16px;">5</label><input id="positivo-5" name="positivo_5" type="text" maxlength="300" class="field-input w-full rounded-xl px-3 py-3 text-center" autocomplete="off"></div>
+      </div>
+     </section>
+
+     <!-- Sección 5 -->
+     <section class="step" data-step="4" aria-label="Sección 5 de 6" hidden="">
+      <label class="block font-bold" for="aspectos-mejorar" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 18px;">¿Qué aspectos mejorarías?</label> 
+      <input id="aspectos-mejorar" name="aspectos_mejorar" type="text" maxlength="300" class="field-input mt-4 w-full rounded-xl px-4 py-3" autocomplete="off">
+     </section>
+
+     <!-- Sección 6 -->
+     <section class="step" data-step="5" aria-label="Sección 6 de 6" hidden="">
+      <label class="block font-bold" for="comentarios" style="color: rgb(20, 60, 54); font-weight: 700; font-size: 18px;">Comentarios adicionales</label> 
+      <textarea id="comentarios" name="comentarios" maxlength="1000" rows="5" class="field-input mt-4 w-full resize-y rounded-xl px-4 py-3"></textarea>
+     </section>
+
+     <p id="form-message" class="mt-6 rounded-xl px-4 py-3 text-sm font-semibold" role="alert" aria-live="assertive" hidden=""></p>
+     
+     <div class="mt-9 flex flex-wrap items-center justify-between gap-3 border-t border-[#d9e0d8] pt-7">
+      <button id="back-button" type="button" class="rounded-full border border-[#b9c8be] px-6 py-3 font-bold transition hover:bg-[#e7eee7]" hidden="" style="background: rgb(253, 248, 239); color: rgb(0, 87, 74); font-weight: 700; font-size: 16px;">Anterior</button>
+      <p id="required-note" style="color: rgb(88, 113, 104); font-weight: 400; font-size: 14px;">* Pregunta obligatoria</p>
+      <button id="next-button" type="button" class="ml-auto rounded-full px-6 py-3 font-bold transition hover:brightness-95 disabled:opacity-60" style="background: rgb(2, 131, 113); color: rgb(255, 255, 255); font-weight: 700; font-size: 16px;">Continuar</button> 
+      <button id="submit-button" type="submit" class="ml-auto rounded-full px-6 py-3 font-bold transition hover:brightness-95 disabled:opacity-60" hidden="" style="background: rgb(2, 131, 113); color: rgb(255, 255, 255); font-weight: 700; font-size: 16px;">Enviar encuesta</button>
+     </div>
+    </form>
+
+    <section id="farewell-panel" class="py-8 text-center" aria-live="polite" hidden="">
+     <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#d9f0e8] text-[#00574a]" aria-hidden="true"><i data-lucide="heart" class="h-8 w-8"></i></div>
+     <h2 class="display-font mt-6" style="color: rgb(20, 60, 54); font-weight: 800; font-size: 24px;">Gracias por tu tiempo</h2>
+     <p class="mx-auto mt-3 max-w-lg leading-relaxed" style="color: rgb(66, 97, 89); font-weight: 400; font-size: 17px; line-height: 1.5;">Respetamos tu decisión de no participar. Te agradecemos por considerar esta invitación.</p>
+     <button id="farewell-restart" type="button" class="mt-7 rounded-full px-6 py-3 font-bold" style="background: rgb(0, 87, 74); color: rgb(255, 255, 255); font-weight: 700; font-size: 16px;">Volver al inicio</button>
+    </section>
+
+    <section id="success-panel" class="py-8 text-center" aria-live="polite" hidden="">
+     <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#d9f0e8] text-[#00574a]" aria-hidden="true"><i data-lucide="check" class="h-9 w-9"></i></div>
+     <h2 class="display-font mt-6" style="color: rgb(20, 60, 54); font-weight: 800; font-size: 24px;">¡Gracias por tu respuesta!</h2>
+     <p class="mx-auto mt-3 max-w-lg leading-relaxed" style="color: rgb(66, 97, 89); font-weight: 400; font-size: 17px; line-height: 1.5;">Tu encuesta se envió correctamente. Agradecemos el tiempo que dedicaste a compartir tu opinión.</p>
+     <button id="new-response-button" type="button" class="mt-7 rounded-full px-6 py-3 font-bold" style="background: rgb(0, 87, 74); color: rgb(255, 255, 255); font-weight: 700; font-size: 16px;">Enviar otra respuesta</button>
+    </section>
+   </div>
+  </section>
+ </main>
+
+ <script>
+    // ⚙️ PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbygk5JXDrTlYo7aaQQPkUsOM8FKf64V9oFHUBMbf5QHgMs2-Sh6OSvcCLcfziVS6XB0qg/exec';
+
+    const form = document.getElementById('survey-form');
+    const steps = [...document.querySelectorAll('.step')];
+    const message = document.getElementById('form-message');
+    const nextButton = document.getElementById('next-button');
+    const backButton = document.getElementById('back-button');
+    const submitButton = document.getElementById('submit-button');
+    let currentStep = 0;
+
+    function showMessage(text) {
+      message.textContent = text;
+      message.style.background = '#f8ddd5';
+      message.style.color = '#792c1e';
+      message.hidden = false;
+    }
+    function clearMessage() {
+      message.hidden = true;
+      message.textContent = '';
+    }
+    function showStep(index) {
+      currentStep = index;
+      steps.forEach((step, i) => { step.hidden = i !== index; });
+      document.getElementById('progress-count').textContent = `${index + 1} / 6`;
+      document.getElementById('progress-fill').style.width = `${((index + 1) / 6) * 100}%`;
+      document.getElementById('progress-track').setAttribute('aria-valuenow', String(index + 1));
+      backButton.hidden = index === 0;
+      nextButton.hidden = index === 5;
+      submitButton.hidden = index !== 5;
+      document.getElementById('required-note').hidden = index !== 1 && index !== 2;
+      clearMessage();
+    }
+
+    function responseData(participation) {
+      return {
+        participacion: participation,
+        carrera: form.elements.carrera.value.trim(),
+        institucion: form.elements.institucion.value.trim(),
+        anio_cursado: form.elements.anio_cursado.value || '',
+        servicio: form.elements.servicio.value || '',
+        positivo_1: form.elements.positivo_1.value.trim(),
+        positivo_2: form.elements.positivo_2.value.trim(),
+        positivo_3: form.elements.positivo_3.value.trim(),
+        positivo_4: form.elements.positivo_4.value.trim(),
+        positivo_5: form.elements.positivo_5.value.trim(),
+        aspectos_mejorar: form.elements.aspectos_mejorar.value.trim(),
+        comentarios: form.elements.comentarios.value.trim()
+      };
+    }
+
+    function restart() {
+      form.reset();
+      document.getElementById('success-panel').hidden = true;
+      document.getElementById('farewell-panel').hidden = true;
+      form.hidden = false;
+      showStep(0);
+      form.querySelector('input[name="participacion"]').focus();
+    }
+
+    async function sendData(dataObj) {
+      try {
+        // Usamos no-cors para evitar bloqueos del navegador con Google Apps Script
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dataObj)
+        });
+        return { isOk: true };
+      } catch (err) {
+        console.error(err);
+        return { isOk: false };
+      }
+    }
+
+    nextButton.addEventListener('click', async () => {
+      clearMessage();
+      if (currentStep === 0) {
+        const participation = form.elements.participacion.value;
+        if (!participation) {
+          showMessage('Selecciona Sí o No para continuar.');
+          form.querySelector('input[name="participacion"]').focus();
+          return;
+        }
+        if (participation === 'No') {
+          nextButton.disabled = true;
+          const result = await sendData({
+            participacion:'No', carrera:'', institucion:'', anio_cursado:'', servicio:'',
+            positivo_1:'', positivo_2:'', positivo_3:'', positivo_4:'', positivo_5:'',
+            aspectos_mejorar:'', comentarios:''
+          });
+          nextButton.disabled = false;
+          if (!result.isOk) {
+            showMessage('No pudimos registrar tu elección. Revisa tu conexión.');
+            return;
+          }
+          form.hidden = true;
+          document.getElementById('farewell-panel').hidden = false;
+          return;
+        }
+      }
+      if (currentStep === 1 && (!form.elements.carrera.value.trim() || !form.elements.institucion.value.trim() || !form.elements.anio_cursado.value)) {
+        showMessage('Completa tu carrera, institución y año de cursado para continuar.');
+        if (!form.elements.carrera.value.trim()) form.elements.carrera.focus();
+        else if (!form.elements.institucion.value.trim()) form.elements.institucion.focus();
+        else form.querySelector('input[name="anio_cursado"]').focus();
+        return;
+      }
+      if (currentStep === 2 && !form.elements.servicio.value) {
+        showMessage('Selecciona una opción para continuar.');
+        form.querySelector('input[name="servicio"]').focus();
+        return;
+      }
+      if (currentStep < 5) showStep(currentStep + 1);
+    });
+
+    backButton.addEventListener('click', () => {
+      if (currentStep > 0) showStep(currentStep - 1);
+    });
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (currentStep !== 5) return;
+      clearMessage();
+      
+      submitButton.disabled = true;
+      const result = await sendData(responseData('Sí'));
+      submitButton.disabled = false;
+      
+      if (!result.isOk) {
+        showMessage('No pudimos guardar tu respuesta. Revisa tu conexión e inténtalo nuevamente.');
+        return;
+      }
+      form.hidden = true;
+      document.getElementById('success-panel').hidden = false;
+    });
+
+    document.getElementById('new-response-button').addEventListener('click', restart);
+    document.getElementById('farewell-restart').addEventListener('click', restart);
+
+    showStep(0);
+    lucide.createIcons();
+  </script>
+</body>
+</html>
